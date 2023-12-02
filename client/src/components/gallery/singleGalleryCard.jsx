@@ -5,8 +5,6 @@ import EditGallery from "../EditGallery";
 import DeleteImage from "../DeleteImage";
 import Drawer from "react-modern-drawer";
 import "react-modern-drawer/dist/index.css";
-import dotenv from "dotenv"
-dotenv.config();
 
 const SingleGalleryCard = ({ gallery, onUpdateImage }) => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -24,11 +22,9 @@ const SingleGalleryCard = ({ gallery, onUpdateImage }) => {
   }
   // Extracting the public_id from gallery.file
   const publicId = gallery.file.public_id;
+  const cloudinaryUrl = import.meta.env.VITE_REACT_APP_CLOUDINARY_URL
 
-  // // Constructing the Cloudinary URL
-  // const cloudinaryCloudName = "dcpehgnee";
-  // const cloudinaryBaseUrl = `https://res.cloudinary.com/${cloudinaryCloudName}/image/upload/`;
-  const imageUrl = `${process.env.CLOUDINARY_URL}${publicId}`;
+  const imageUrl = `${cloudinaryUrl}${publicId}`;
   const formattedDate = new Date(gallery.date).toLocaleDateString();
  
   const toggleDrawer = () => {
