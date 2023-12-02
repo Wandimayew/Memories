@@ -67,7 +67,7 @@ const Login = () => {
         </h1>
         <form className="mx-4">
           <div className="flex flex-col mb-4">
-            <label htmlFor="email" className="text-xl">
+            <label htmlFor="email" className="text-lg sm:text-xl">
               Email:
             </label>
             <input
@@ -81,7 +81,7 @@ const Login = () => {
             />
           </div>
           <div className="flex flex-col mb-4">
-            <label htmlFor="password" className="text-xl">
+            <label htmlFor="password" className="text-lg sm:text-xl">
               Password:
             </label>
             <input
@@ -97,7 +97,7 @@ const Login = () => {
         </form>
         <div className="flex justify-center mt-4">
           <button
-            className="w-3/4 text-white rounded-xl bg-green-500 border-2 shadow-xl py-2 hover:opacity-80 hover:cursor-pointer"
+            className="w-3/4 text-white rounded-xl bg-green-500 border-2 shadow-lg py-2 hover:opacity-80 hover:cursor-pointer"
             onClick={loginHandler}
           >
             Login

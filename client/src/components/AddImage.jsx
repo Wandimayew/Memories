@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useSnackbar } from "notistack";
+import Spinner from "./Spinner";
 
 const AddImage = ({ onAddImage }) => {
   const [file, setFile] = useState(null);
@@ -10,6 +11,7 @@ const AddImage = ({ onAddImage }) => {
   const [detail, setDetail] = useState("");
   const { id } = useParams();
   const { enqueueSnackbar } = useSnackbar();
+  const [loading, setLoading] = useState(false);
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -37,10 +39,12 @@ const AddImage = ({ onAddImage }) => {
           },
         },
         { timeout: 100000 }
-      );
+        );
+        setLoading(true);
       const newImage = response.data;
       onAddImage({ gallery: [newImage] });
       enqueueSnackbar("Image Added Successfully", { variant: "success" });
+      setLoading(false);
     } catch (error) {
       if (axios.isCancel(error)) {
         console.log("Request canceled", error.message);
@@ -65,7 +69,9 @@ const AddImage = ({ onAddImage }) => {
   };
 
   return (
+    
     <form className="w-full max-w-lg mx-auto  p-6 bg-white ">
+      {loading && <Spinner />}
       <div className="mb-6">
         <label
           htmlFor="title"

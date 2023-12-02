@@ -16,7 +16,7 @@ const Register = () => {
   const registerHandler = async (e) => {
     e.preventDefault();
     await axios
-      .post("https://memory-2jvo.onrender.com/users/register", {
+      .post("https://memory-2jvo.onrender.com/users/register/", {
         username,
         email,
         password,
@@ -53,7 +53,7 @@ const Register = () => {
         <form className="mx-4">
           <p className="text-center font-bold p-2">Registration Form</p>
           <div className="flex flex-col mb-4">
-            <label htmlFor="username" className="text-xl">
+            <label htmlFor="username" className="text-lg sm:text-xl">
               Full Name:
             </label>
             <input
@@ -67,7 +67,7 @@ const Register = () => {
             />
           </div>
           <div className="flex flex-col mb-4">
-            <label htmlFor="email" className="text-xl">
+            <label htmlFor="email" className="text-lg sm:text-xl">
               Email:
             </label>
             <input
@@ -81,7 +81,7 @@ const Register = () => {
             />
           </div>
           <div className="flex flex-col mb-4">
-            <label htmlFor="password" className="text-xl">
+            <label htmlFor="password" className="text-lg sm:text-xl">
               Password:
             </label>
             <input
