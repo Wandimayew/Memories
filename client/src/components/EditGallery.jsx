@@ -22,7 +22,7 @@ const EditGallery = ({ gallery, onUpdateImage }) => {
     e.preventDefault();
     try {
       await axios
-        .put(`http://localhost:5000/gallery/files/edit/${id}`, {
+        .put(`https://memory-2jvo.onrender.com/gallery/files/edit/${id}`, {
           title,
           detail,
           date,
@@ -47,7 +47,7 @@ const EditGallery = ({ gallery, onUpdateImage }) => {
     const fetchgallery = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/gallery/files/edit/${id}`
+          `https://memory-2jvo.onrender.com/gallery/files/edit/${id}`
         );
         const result = response.data.gallery;
         setTitle(result.title);

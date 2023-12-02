@@ -9,7 +9,7 @@ const DeleteImage = ({ gallery, onDeleteImage }) => {
     const deleted = async () => {
       try {
         const response = await axios.delete(
-          `http://localhost:5000/gallery/files/delete/${id}`
+          `https://memory-2jvo.onrender.com/gallery/files/delete/${id}`
         );
         if (response) {
           enqueueSnackbar("Image Deleted Successfully", { variant: "success" });

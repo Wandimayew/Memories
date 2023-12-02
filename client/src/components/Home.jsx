@@ -58,7 +58,7 @@ const Home = () => {
     const checkTokenValidity = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/users/home/${id}`,
+          `https://memory-2jvo.onrender.com/users/home/${id}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,

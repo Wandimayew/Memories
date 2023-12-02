@@ -29,7 +29,7 @@ const AddImage = ({ onAddImage }) => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/gallery/files",
+        "https://memory-2jvo.onrender.com/gallery/files",
         formData,
         {
           headers: {

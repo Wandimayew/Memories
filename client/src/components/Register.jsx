@@ -16,7 +16,7 @@ const Register = () => {
   const registerHandler = async (e) => {
     e.preventDefault();
     await axios
-      .post("http://127.0.0.1:5000/users/register", {
+      .post("https://memory-2jvo.onrender.com/users/register", {
         username,
         email,
         password,
@@ -121,5 +121,4 @@ const Register = () => {
     </div>
   );
 };
-
 export default Register;

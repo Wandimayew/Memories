@@ -14,7 +14,7 @@ const Gallery = ({ gallery }) => {
   const updateGallery = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/gallery/files/get/${id}`
+        `https://memory-2jvo.onrender.com/gallery/files/get/${id}`
       );
       const updatedGallery = response.data;
       setGallerys(updatedGallery);
@@ -32,7 +32,7 @@ const Gallery = ({ gallery }) => {
     const getGallery = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/gallery/files/get/${id}`
+          `https://memory-2jvo.onrender.com/gallery/files/get/${id}`
         );
         let result = response.data.gallery.length;
         let data = response.data.gallery;

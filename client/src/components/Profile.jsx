@@ -22,7 +22,7 @@ const Profile = ({ onClose }) => {
     const getUser = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/users/home/${id}`
+          `https://memory-2jvo.onrender.com/users/home/${id}`
         );
         let result = response.data;
         if (result) {
@@ -47,7 +47,7 @@ const Profile = ({ onClose }) => {
     e.preventDefault();
     try {
       await axios
-        .put(`http://localhost:5000/users/edit/${id}`, { username })
+        .put(`https://memory-2jvo.onrender.com/users/edit/${id}`, { username })
         .then((result) => {
           enqueueSnackbar(
             `Profile Updated Success Fully To ${result.data.user.username}`,
@@ -71,7 +71,7 @@ const Profile = ({ onClose }) => {
       if (newPassword === confirmPassword) {
         try {
           await axios
-            .put(`http://localhost:5000/users/edit/password/${id}`, {
+            .put(`https://memory-2jvo.onrender.com/users/edit/password/${id}`, {
               newPassword,
             })
             .then((result) => {

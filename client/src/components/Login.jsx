@@ -18,7 +18,7 @@ const Login = () => {
   const loginHandler = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/users/login/", {
+      const response = await axios.post("https://memory-2jvo.onrender.com/users/login/", {
         email,
         password,
       });
