@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { FaUserEdit } from "react-icons/fa";
 import { useSnackbar } from "notistack";
+import { PulseLoader } from "react-spinners";
 
 const Profile = ({ onClose }) => {
   const { id } = useParams();
@@ -16,10 +17,12 @@ const Profile = ({ onClose }) => {
   const [text, setText] = useState(null);
   const [now, setNow] = useState(false);
   const [pass, setPass] = useState("");
+  const [isLoading, setIsLoading]= useState(false);
   const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     const getUser = async () => {
+      setIsLoading(true)
       try {
         const response = await axios.get(
           `https://memory-2jvo.onrender.com/users/home/${id}`
@@ -36,6 +39,8 @@ const Profile = ({ onClose }) => {
       } catch (error) {
         enqueueSnackbar("Server Error", { variant: "error" });
         console.log(error);
+      }finally{
+        setIsLoading(false)
       }
     };
     getUser();
@@ -45,12 +50,13 @@ const Profile = ({ onClose }) => {
     setEditablePassword(false);
     setNow(false);
     e.preventDefault();
+    setIsLoading(true)
     try {
       await axios
         .put(`https://memory-2jvo.onrender.com/users/edit/${id}`, { username })
         .then((result) => {
           enqueueSnackbar(
-            `Profile Updated Success Fully To ${result.data.user.username}`,
+            `Profile Updated Successfully To ${result.data.user.username}`,
             { variant: "success" }
           );
           setText("Profile updated successfully");
@@ -64,12 +70,15 @@ const Profile = ({ onClose }) => {
       console.log(error);
       enqueueSnackbar("Error Updating Profile", { variant: "error" });
       setText("Error updating profile");
+    }finally{
+      setIsLoading(false);
     }
   };
   const handleChangePassword = async () => {
     if (pass === oldPassword) {
       if (newPassword === confirmPassword) {
         try {
+          setIsLoading(true);
           await axios
             .put(`https://memory-2jvo.onrender.com/users/edit/password/${id}`, {
               newPassword,
@@ -89,6 +98,8 @@ const Profile = ({ onClose }) => {
           console.log(error);
           enqueueSnackbar("Error Changing Password", { variant: "error" });
           setText("Error updating profile");
+        }finally{
+          setIsLoading(false)
         }
       } else {
         enqueueSnackbar(

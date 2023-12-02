@@ -3,6 +3,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useSnackbar } from "notistack";
 import Spinner from "./Spinner";
+import { PulseLoader } from "react-spinners";
 
 const AddImage = ({ onAddImage }) => {
   const [file, setFile] = useState(null);
@@ -19,6 +20,7 @@ const AddImage = ({ onAddImage }) => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const formData = new FormData();
 
     formData.append("title", title);
@@ -40,11 +42,11 @@ const AddImage = ({ onAddImage }) => {
         },
         { timeout: 100000 }
         );
-        setLoading(true);
+
       const newImage = response.data;
       onAddImage({ gallery: [newImage] });
       enqueueSnackbar("Image Added Successfully", { variant: "success" });
-      setLoading(false);
+
     } catch (error) {
       if (axios.isCancel(error)) {
         console.log("Request canceled", error.message);
@@ -65,13 +67,16 @@ const AddImage = ({ onAddImage }) => {
         console.error("Axios Error:", error);
         enqueueSnackbar("Error Adding Image", { variant: "error" });
       }
+    }finally{
+      setLoading(false);
     }
   };
 
   return (
-    
     <form className="w-full max-w-lg mx-auto  p-6 bg-white ">
-      {loading && <Spinner />}
+      {loading && <div className="flex justify-center">
+        <PulseLoader color="#36D7B7" loading={true}/>
+      </div> }
       <div className="mb-6">
         <label
           htmlFor="title"

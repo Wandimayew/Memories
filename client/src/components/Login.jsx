@@ -7,16 +7,19 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useSnackbar } from "notistack";
+import { PropagateLoader } from 'react-spinners';
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading]=useState(false);
   const navigate = useNavigate();
   const { login } = useAuth();
   const { enqueueSnackbar } = useSnackbar();
 
   const loginHandler = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       const response = await axios.post("https://memory-2jvo.onrender.com/users/login/", {
         email,
@@ -45,10 +48,12 @@ const Login = () => {
         console.error("Response data:", error.response.data);
       }
       console.error(error);
+    }finally {
+      setIsLoading(false);
     }
   };
   return (
-    <div className="flex flex-col justify-stretch h-full bg-white">
+    <div className=" flex flex-col justify-stretch h-full bg-white">
   <div className="text-black text-2xl font-bold text-center my-5">
     <h1 className="hover:animate-ping">MEMORIES</h1>
   </div>
@@ -71,7 +76,7 @@ const Login = () => {
               Email:
             </label>
             <input
-              type="text"
+              type="email"
               id="email"
               placeholder="Enter your email"
               className="w-full border-solid border-b-2 shadow-sm rounded-md px-4 py-2"
@@ -95,7 +100,11 @@ const Login = () => {
             />
           </div>
         </form>
-        <div className="flex justify-center mt-4">
+        {isLoading && (
+          <div className="flex justify-center mt-4">
+          <PropagateLoader color="#36D7B7" loading={true} />
+        </div>)}
+          <div className="flex justify-center mt-4">
           <button
             className="w-3/4 text-white rounded-xl bg-green-500 border-2 shadow-lg py-2 hover:opacity-80 hover:cursor-pointer"
             onClick={loginHandler}
@@ -114,6 +123,7 @@ const Login = () => {
             </Link>
           </p>
         </div>
+
         <div className="flex justify-evenly mt-4 py-4">
           <FcGoogle className="text-2xl hover:animate-bounce hover:cursor-pointer" />
           <ImTelegram className="text-2xl hover:animate-bounce hover:cursor-pointer" />

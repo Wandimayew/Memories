@@ -1,10 +1,12 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useSnackbar } from "notistack";
+import { PulseLoader } from "react-spinners";
 
 const EditGallery = ({ gallery, onUpdateImage }) => {
   const [title, setTitle] = useState("");
   const [detail, setDetail] = useState("");
+  const [isLoading, setIsLoading]= useState(false)
   const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
   const id = gallery._id;
   const { enqueueSnackbar } = useSnackbar();
@@ -20,6 +22,7 @@ const EditGallery = ({ gallery, onUpdateImage }) => {
   };
   const handleOnsubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       await axios
         .put(`https://memory-2jvo.onrender.com/gallery/files/edit/${id}`, {
@@ -41,6 +44,8 @@ const EditGallery = ({ gallery, onUpdateImage }) => {
       enqueueSnackbar("Unable to Update Image, try again latter", {
         variant: "error",
       });
+    }finally{
+      setIsLoading(false)
     }
   };
   useEffect(() => {
@@ -62,6 +67,9 @@ const EditGallery = ({ gallery, onUpdateImage }) => {
   return (
     <div className="f z-10  top-0 left-0 w-full h-full flex justify-end">
       <div className="max-w-md mx-auto  bg-white p-2 rounded-md shadow-md relative">
+      {isLoading && <div className="flex justify-center">
+        <PulseLoader color="#36D7B7" loading={true}/>
+      </div> }
         <form
           onSubmit={handleOnsubmit}
           className="max-w-md mx-auto my-2 bg-white "

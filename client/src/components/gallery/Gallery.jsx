@@ -3,6 +3,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import GalleryCard from "./GalleryCard";
 import { useSnackbar } from "notistack";
+import { HashLoader } from "react-spinners";
 
 const Gallery = ({ gallery }) => {
   const { id } = useParams();
@@ -10,6 +11,7 @@ const Gallery = ({ gallery }) => {
   const [loading, setLoading] = useState(true);
   const [galleryImages, setGalleryImages] = useState([]);
   const { enqueueSnackbar } = useSnackbar();
+  const [isGallerEmpty, setIsGallerEmpty]= useState(false)
 
   const updateGallery = async () => {
     try {
@@ -28,8 +30,8 @@ const Gallery = ({ gallery }) => {
   };
 
   useEffect(() => {
-    setGallerys(gallery);
     const getGallery = async () => {
+      setGallerys(gallery);
       try {
         const response = await axios.get(
           `https://memory-2jvo.onrender.com/gallery/files/get/${id}`
@@ -40,16 +42,16 @@ const Gallery = ({ gallery }) => {
           setGallerys(response.data);
           console.log("length of the array: ", result);
           setGalleryImages(response.data);
+          setLoading(false)
         } else {
           enqueueSnackbar("Gallery is Empty", { variant: "warning" });
+          setLoading(true);
           console.log("gallary is empty");
         }
       } catch (error) {
         enqueueSnackbar("Server Error", { variant: "error" });
         console.log(error);
-      } finally {
-        setLoading(false);
-      }
+      } 
     };
     getGallery();
   }, [gallery]);
@@ -57,8 +59,9 @@ const Gallery = ({ gallery }) => {
   return (
     <div className="ml-2">
       {loading ? (
-        <p>Loading...</p>
-      ) : (
+          <div className="flex justify-center items-center mt-4">
+          <HashLoader color="#36D7B7" loading={true} />
+        </div>): (
         <GalleryCard gallerys={gallerys} onUpdateImage={updateGallery} />
       )}
     </div>

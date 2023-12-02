@@ -123,10 +123,13 @@ const Home = () => {
         <div className="fixed  z-60 right-0 w-10 h-10 flex justify-end mt-10 mx-4">
           <div
             onClick={toggleDrawer}
+            data-tooltip-id="my-tooltip"
+            data-tooltip-content="Add Image"
             className={`text-2xl ${hidden}  text-white -left-5  bg-blue-600 rounded-full w-10 h-10 text-center py-[0.15rem] cursor-pointer hover:bg-blue-500`}
           >
             =
           </div>
+          <Tooltip id="my-tooltip" type="default" effect="solid" />
         </div>
       </div>
       <Drawer

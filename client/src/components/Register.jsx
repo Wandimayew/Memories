@@ -6,15 +6,19 @@ import { BsLinkedin } from "react-icons/bs";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { useSnackbar } from "notistack";
+import { PropagateLoader } from "react-spinners";
 
 const Register = () => {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [isLoading, setIsLoading]= useState(false);
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
   const registerHandler = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
+    try {
     await axios
       .post("https://memory-2jvo.onrender.com/users/register/", {
         username,
@@ -30,7 +34,11 @@ const Register = () => {
         enqueueSnackbar("Registration is Failed, Please try again", {
           variant: "error",
         });
-      });
+      }
+      );}
+      finally{
+        setIsLoading(false)
+      }
   };
   return (
 <div className="flex flex-col p-3 justify-stretch h-full bg-white">
@@ -71,7 +79,7 @@ const Register = () => {
               Email:
             </label>
             <input
-              type="text"
+              type="email"
               id="email"
               placeholder="Enter Email"
               className="w-full border-solid border-b-2 shadow-sm rounded-md px-4 py-2"
@@ -94,7 +102,10 @@ const Register = () => {
               required
             />
           </div>
-        </form>
+        {isLoading && (
+          <div className="flex justify-center mt-4">
+          <PropagateLoader color="#36D7B7" loading={true} />
+        </div>)}
         <div className="flex justify-center mt-4">
           <button
             className="w-3/4 text-white rounded-xl bg-green-500 border-2 shadow-xl py-2 hover:opacity-80 hover:cursor-pointer"
@@ -103,6 +114,7 @@ const Register = () => {
             Register
           </button>
         </div>
+        </form>
         <div className="mt-7 mx-6">
           <p>
             Already have an account?{" "}
