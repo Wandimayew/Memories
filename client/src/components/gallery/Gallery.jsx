@@ -9,9 +9,7 @@ const Gallery = ({ gallery }) => {
   const { id } = useParams();
   const [gallerys, setGallerys] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [galleryImages, setGalleryImages] = useState([]);
   const { enqueueSnackbar } = useSnackbar();
-  const [isGallerEmpty, setIsGallerEmpty]= useState(false)
 
   const updateGallery = async () => {
     try {
@@ -20,7 +18,6 @@ const Gallery = ({ gallery }) => {
       );
       const updatedGallery = response.data;
       setGallerys(updatedGallery);
-      setGalleryImages(updatedGallery.gallery);
     } catch (error) {
       enqueueSnackbar("Error fetching updated gallery data", {
         variant: "error",
@@ -41,7 +38,6 @@ const Gallery = ({ gallery }) => {
         if (data && result > 0) {
           setGallerys(response.data);
           console.log("length of the array: ", result);
-          setGalleryImages(response.data);
           setLoading(false)
         } else {
           enqueueSnackbar("Gallery is Empty", { variant: "warning" });

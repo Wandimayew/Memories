@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useSnackbar } from "notistack";
-import Spinner from "./Spinner";
 import { PulseLoader } from "react-spinners";
 
 const AddImage = ({ onAddImage }) => {
