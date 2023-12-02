@@ -129,6 +129,9 @@ const Profile = ({ onClose }) => {
         </button>
         <div className="flex justify-between">
           <h1 className="text-2xl font-bold">Profile</h1>
+          {isLoading && <div className="flex justify-center">
+        <PulseLoader color="#36D7B7" loading={true}/>
+      </div> }
           {now && (
             <p className="text-green-500 px-6 font-bold text-xl">{text}</p>
           )}
