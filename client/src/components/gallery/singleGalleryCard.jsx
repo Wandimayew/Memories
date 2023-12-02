@@ -5,7 +5,8 @@ import EditGallery from "../EditGallery";
 import DeleteImage from "../DeleteImage";
 import Drawer from "react-modern-drawer";
 import "react-modern-drawer/dist/index.css";
-
+import dotenv from "dotenv"
+dotenv.config();
 
 const SingleGalleryCard = ({ gallery, onUpdateImage }) => {
   const [isOpen, setIsOpen] = React.useState(false);
