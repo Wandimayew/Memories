@@ -4,8 +4,10 @@ import fs from "fs";
 
 cloudinary.config({
   cloud_name: "dcpehgnee",
-  api_key: "843599552916561",
-  api_secret: "D6q2oDpQf-NJdyqhKv8NJhl6k9k",
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET
+  // api_key: "843599552916561",
+  // api_secret: "D6q2oDpQf-NJdyqhKv8NJhl6k9k",
 });
 
 export const uploadImage = async (req, res) => {

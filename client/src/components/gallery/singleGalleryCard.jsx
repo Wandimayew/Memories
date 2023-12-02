@@ -6,11 +6,11 @@ import DeleteImage from "../DeleteImage";
 import Drawer from "react-modern-drawer";
 import "react-modern-drawer/dist/index.css";
 
+
 const SingleGalleryCard = ({ gallery, onUpdateImage }) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [isEnlarged, setIsEnlarged] = useState(false);
   const [deletes, setDeletes] = useState(false);
-  const [count, setCount] = useState(1);
 
   // Ensure that gallery.file is an object with a public_id property
   if (
@@ -24,10 +24,10 @@ const SingleGalleryCard = ({ gallery, onUpdateImage }) => {
   // Extracting the public_id from gallery.file
   const publicId = gallery.file.public_id;
 
-  // Constructing the Cloudinary URL
-  const cloudinaryCloudName = "dcpehgnee";
-  const cloudinaryBaseUrl = `https://res.cloudinary.com/${cloudinaryCloudName}/image/upload/`;
-  const imageUrl = `${cloudinaryBaseUrl}${publicId}`;
+  // // Constructing the Cloudinary URL
+  // const cloudinaryCloudName = "dcpehgnee";
+  // const cloudinaryBaseUrl = `https://res.cloudinary.com/${cloudinaryCloudName}/image/upload/`;
+  const imageUrl = `${process.env.CLOUDINARY_URL}${publicId}`;
   const formattedDate = new Date(gallery.date).toLocaleDateString();
  
   const toggleDrawer = () => {
