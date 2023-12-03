@@ -2,8 +2,8 @@ import express from "express";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import cors from "cors";
-import router1 from "./routes/routes1.js";
-import router2 from "./routes/routes2.cjs";
+import router1 from "./routes/User.js";
+import router2 from "./routes/Gallery.cjs";
 import dotenv from "dotenv";
 dotenv.config();
 
