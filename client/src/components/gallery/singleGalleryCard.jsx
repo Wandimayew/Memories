@@ -33,7 +33,8 @@ const SingleGalleryCard = ({ gallery, onUpdateImage }) => {
 
   const handleImageClick = (e) => {
     if (e.target.classList.contains("edit-icon")) {
-      console.log("edit icon clicked")
+      // console.log("edit icon clicked")
+      console.log(imageUrl)
     } else if (e.target.classList.contains("delete-icon")) {
       console.log("delete clicked");
     } else {
