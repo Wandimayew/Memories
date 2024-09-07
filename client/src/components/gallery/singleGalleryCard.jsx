@@ -21,7 +21,7 @@ const SingleGalleryCard = ({ gallery, onUpdateImage }) => {
     return null;
   }
   // Extracting the public_id from gallery.file
-  const publicId = gallery;
+  const publicId = gallery.file.public_id;
   const cloudinaryUrl = import.meta.env.VITE_REACT_APP_CLOUDINARY_URL
 
   const imageUrl = `${cloudinaryUrl}${publicId}`;
