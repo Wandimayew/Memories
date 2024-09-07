@@ -21,7 +21,7 @@ const SingleGalleryCard = ({ gallery, onUpdateImage }) => {
     return null;
   }
   // Extracting the public_id from gallery.file
-  const publicId = gallery.file.public_id;
+  const publicId = gallery;
   const cloudinaryUrl = import.meta.env.VITE_REACT_APP_CLOUDINARY_URL
 
   const imageUrl = `${cloudinaryUrl}${publicId}`;
@@ -34,7 +34,7 @@ const SingleGalleryCard = ({ gallery, onUpdateImage }) => {
   const handleImageClick = (e) => {
     if (e.target.classList.contains("edit-icon")) {
       // console.log("edit icon clicked")
-      console.log(imageUrl + "public id is " + gallery)
+      console.log(imageUrl + "public id is " + publicId + "and nnnn gallery" + gallery)
     } else if (e.target.classList.contains("delete-icon")) {
       console.log("delete clicked");
     } else {
