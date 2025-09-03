@@ -22,8 +22,17 @@ const SingleGalleryCard = ({ gallery, onUpdateImage }) => {
   }
   // Extracting the public_id from gallery.file
   const publicId = gallery.file.public_id;
-  const cloudinaryUrl = import.meta.env.VITE_REACT_APP_CLOUDINARY_URL
 
+  // Access the environment variable
+let cloudinaryUrl = import.meta.env.VITE_CLOUDINARY_URL;
+
+// Check if the variable is undefined
+if (typeof cloudinaryUrl === 'undefined') {
+  cloudinaryUrl = process.env.VITE_REACT_APP_CLOUDINARY_URL
+}
+
+console.log("This is cloudinary url: ",cloudinaryUrl);
+  
   const imageUrl = `${cloudinaryUrl}${publicId}`;
   const formattedDate = new Date(gallery.date).toLocaleDateString();
  
